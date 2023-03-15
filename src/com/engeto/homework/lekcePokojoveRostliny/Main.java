@@ -26,9 +26,14 @@ public class Main {
             System.out.println(" ");
         }
 
+        list.removePlant(list.getPlantFromIndex(list.getPlantList(),2));
 //        list.getPlantFromIndex(List<PlantList>list, 2);
 
-//        try {
+            for (Plant plant: list.getPlantList()) {
+                System.out.println(plant);
+                System.out.println(" ");
+            }
+
         System.out.println(plantExample.getWateringInfo());
         System.out.println(plantWithError.getWateringInfo());
     }
