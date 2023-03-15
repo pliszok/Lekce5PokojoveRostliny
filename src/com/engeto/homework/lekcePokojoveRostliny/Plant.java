@@ -40,7 +40,11 @@ public class Plant {
         return watering;
     }
 
-    public void setWatering(LocalDate watering) {
+    public void setWatering(LocalDate watering) throws PlantException{
+        if (watering.isBefore(planted)) {
+            throw new PlantException("The last watering date was set before the date of planting. " +
+                    "Planted on: " + planted + ", next watering on: " + watering + ".");
+        }
         this.watering = watering;
     }
 
@@ -48,9 +52,11 @@ public class Plant {
         return frequencyOfWatering;
     }
 
-    public void setFrequencyOfWatering(int frequencyOfWatering) {
+    public void setFrequencyOfWatering(int frequencyOfWatering) throws PlantException{
+        if (frequencyOfWatering <= 0) {
+            throw new PlantException("The frequency of watering cannot be \"zero\" or negative and you have entered: " + frequencyOfWatering + ".");
+        }
         this.frequencyOfWatering = frequencyOfWatering;
-        //Proč nefunguje throws PlantException atd. jako na řádku 78-81 tady?
     }
     //endregion
 
@@ -62,6 +68,12 @@ public class Plant {
         this.watering = watering;
         this.frequencyOfWatering = frequencyOfWatering;
     }
+
+    @Override
+    public String toString() {
+        return "Jméno: "+name+", poznámka: "+notes+", zasazena: "+planted+", naposledy zalévaná: "+watering+", kolikrát týdně zalévat: "+frequencyOfWatering;
+    }
+
     public Plant(String name, LocalDate planted, int frequencyOfWatering) {
         this.name = name;
         this.notes = " ";
@@ -69,17 +81,22 @@ public class Plant {
         this.watering = LocalDate.now();
         this.frequencyOfWatering = frequencyOfWatering;
     }
+
     public Plant(String name) {
         this(name, " ", LocalDate.now(), LocalDate.now(), 7);
     }
     //endregion
 
     //region methods
-    public String getWateringInfo() throws PlantException{
-        if(frequencyOfWatering<=0) {
-            throw new PlantException("The frequency of watering cannot be \"zero\" or negative and you have entered: " + frequencyOfWatering +".");
+    public String getWateringInfo() throws PlantException {
+        if (watering.isBefore(planted)) {
+            throw new PlantException("Poslední zalévání bylo nastaveno před datem zasazení. " +
+                    "Zasazeno: " + planted + ", příští zalévání: " + watering + ".");
         }
-            return getName() + ", last watered on: " + getWatering() + ", next watering is on: " + (watering.plusDays(frequencyOfWatering));
+        if (frequencyOfWatering <= 0) {
+            throw new PlantException("Četnost zalévání nemůže být \"nula\" nebo negativní. Zadal jsi " + frequencyOfWatering + ".");
+        }
+        return getName() + ", naposledy zalévána: " + getWatering() + ", příští zalévání: " + (watering.plusDays(frequencyOfWatering));
     }
     //endregion
 }
