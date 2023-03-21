@@ -61,29 +61,32 @@ public class Plant {
     //endregion
 
     //region constructors
-    public Plant(String name, String notes, LocalDate planted, LocalDate watering, int frequencyOfWatering) {
+    public Plant(String name, String notes, int frequencyOfWatering, LocalDate watering, LocalDate planted) {
         this.name = name;
         this.notes = notes;
         this.planted = planted;
         this.watering = watering;
         this.frequencyOfWatering = frequencyOfWatering;
+ //       System.out.println("pokus");
     }
 
     @Override
     public String toString() {
-        return "Jméno: "+name+", poznámka: "+notes+", zasazena: "+planted+", naposledy zalévaná: "+watering+", kolikrát týdně zalévat: "+frequencyOfWatering;
+//        return "Jméno: "+name+", poznámka: "+notes+", zasazena: "+planted+", naposledy zalévaná: "+watering+", kolikrát týdně zalévat: "+frequencyOfWatering;
+        return name+"\t"+notes+"\t"+frequencyOfWatering+"\t"+watering+"\t"+planted;
+
     }
 
-    public Plant(String name, LocalDate planted, int frequencyOfWatering) {
+    public Plant(String name, LocalDate planted, int frequencyOfWatering) throws PlantException{
         this.name = name;
         this.notes = " ";
         this.planted = planted;
-        this.watering = LocalDate.now();
-        this.frequencyOfWatering = frequencyOfWatering;
+        setWatering(LocalDate.now());
+        setFrequencyOfWatering(frequencyOfWatering);
     }
 
     public Plant(String name) {
-        this(name, " ", LocalDate.now(), LocalDate.now(), 7);
+        this(name, " ", 7, LocalDate.now(), LocalDate.now());
     }
     //endregion
 
