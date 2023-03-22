@@ -1,8 +1,9 @@
 package com.engeto.homework.lekcePokojoveRostliny;
 
 import java.time.LocalDate;
+import java.util.*;
 
-public class Plant {
+public class Plant implements Comparable<Plant>{
     //region atributes
     private String name;
     private String notes;
@@ -101,5 +102,11 @@ public class Plant {
         }
         return getName() + ", naposledy zalévána: " + getWatering() + ", příští zalévání: " + (watering.plusDays(frequencyOfWatering));
     }
+
+    @Override
+    public int compareTo(Plant o) {
+        return getName().compareTo(o.getName());
+    }
     //endregion
+
 }

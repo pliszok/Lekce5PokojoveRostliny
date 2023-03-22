@@ -1,13 +1,8 @@
 package com.engeto.homework.lekcePokojoveRostliny;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class PlantList {
     private List<Plant> plantList = new ArrayList<>();
@@ -27,11 +22,6 @@ public class PlantList {
         }
         return plantList.get(index);
     }
-
-//    public String sortByName(List<String> plantList){
-//        List<String> seznam = new ArrayList<>(plantList);
-//        seznam.sort((Comparator<? super String>) plantList);
-//        return  plantList.toString();
 
     //endregion
 
@@ -61,5 +51,16 @@ public class PlantList {
 //          throw new PlantException("Špatný formát datumu na řádku: " + lineNumber + "\n" + items[3] +", "+items[4]+ ": " + e.getCalendar());
 //        }
     }
+
+    public void saveToFile(String filename) throws PlantException {
+        try (PrintWriter outputWriter = new PrintWriter(new FileWriter(filename))) {
+            for (Plant plant : plantList) {
+                outputWriter.println(plant);
+            }
+        } catch (IOException e) {
+            throw new PlantException("Došlo k chybě při zápisu do souboru "+filename+" "+e.getLocalizedMessage());
+        }
+    }
+
     public List<Plant> getPlantList() {return new ArrayList<>(plantList);}
 }

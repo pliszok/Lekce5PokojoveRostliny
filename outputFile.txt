@@ -2,4 +2,4 @@ Fialka 1	Popis fialky - je fialová a hezká	0	2021-05-12	2021-01-01
 Sukulent v koupelně	Nezalévá se	365	2011-03-01	2011-03-01
 Kaktus	není moc náročný	180	2022-01-16	2021-06-28
 Růže	má trny	5	2023-03-01	2022-10-16
-Lilie	komentar	14	2022-04-16	2021-08-28
+Lilie	komentar po upravach	14	2022-04-16	2021-08-28
