@@ -55,6 +55,10 @@ public class Main {
 
             list.saveToFile("outputFile.txt");
 
+            System.out.println("===Výpis datumů, kdy bylo něco zasazeno===");
+
+            list.getPlantDate();
+
             System.out.println("=== Ted načítáme z námi uloženého souboru, seřazeno podle posledního zalévání===");
 
             list.addAllFromFile("outputFile.txt");

@@ -7,8 +7,6 @@ import java.util.*;
 public class PlantList {
     private List<Plant> plantList = new ArrayList<>();
 
-    private Set<Plant> plantSet = new HashSet<>();
-
     // region add, remove, getPlantFromIndex, sort, getPlantlist
     public void addPlant(Plant plant){
         plantList.add(plant);
@@ -36,8 +34,14 @@ public class PlantList {
     public List<Plant> getPlantList() {
         return new ArrayList<>(plantList);
     }
-
     //endregion
+
+    public void getPlantDate(){
+        for (Plant plant:plantList){
+            System.out.println(plant.getPlanted());
+        }
+    }
+
 
     public void addAllFromFile(String filename) throws PlantException {
         int lineNumber = 0;
