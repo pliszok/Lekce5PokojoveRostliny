@@ -25,7 +25,6 @@ public class PlantList {
 
     //endregion
 
-
     public void addAllFromFile(String filename) throws PlantException {
         int lineNumber = 0;
         String[] items = new String[4];

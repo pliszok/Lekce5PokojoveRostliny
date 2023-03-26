@@ -104,8 +104,8 @@ public class Plant implements Comparable<Plant>{
     }
 
     @Override
-    public int compareTo(Plant o) {
-        return getName().compareTo(o.getName());
+    public int compareTo(Plant plant) {
+        return plant.getName().compareTo(plant.getName());
     }
     //endregion
 

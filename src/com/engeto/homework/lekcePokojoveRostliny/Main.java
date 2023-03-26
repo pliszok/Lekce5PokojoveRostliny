@@ -33,7 +33,7 @@ public class Main {
             System.out.println("Ted jsem pridal dva objetky");
             System.out.println("---");
 
-            Collections.sort(list, new PlantNameCommparator());
+            Collections.sort(list.getPlantList());
 
             for (Plant plant : list.getPlantList()) {
                 System.out.println(plant);
@@ -52,6 +52,9 @@ public class Main {
             Plant plantExample2 = new Plant("Lilie", "komentar po upravach",
                     14, LocalDate.of(2022, 4, 16), LocalDate.of(2021, 8, 28));
             list.addPlant(plantExample2);
+
+            Collections.sort(list.getPlantList());
+
 
             list.saveToFile("outputFile.txt");
 
