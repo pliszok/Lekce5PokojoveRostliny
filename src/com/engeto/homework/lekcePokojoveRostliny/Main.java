@@ -29,9 +29,7 @@ public class Main {
 
             list.addPlant(plantExample);
             list.addPlant(plantWithError);
-            System.out.println("---");
-            System.out.println("Ted jsem pridal dva objetky");
-            System.out.println("---");
+            System.out.println("===Ted jsem pridal dva objetky===");
 
             Collections.sort(list.getPlantList());
 
@@ -40,9 +38,9 @@ public class Main {
             }
 
             list.removePlant(list.getPlantFromIndex(list.getPlantList(), 1));
-            System.out.println("---");
-            System.out.println("Ted jsem ubral jeden objekt");
-            System.out.println("---");
+            System.out.println("===Ted jsem ubral jeden objekt a seřadíme podle jména===");
+
+            list.sortByName();
 
             for (Plant plant : list.getPlantList()) {
                 System.out.println(plant);
@@ -53,12 +51,11 @@ public class Main {
                     14, LocalDate.of(2022, 4, 16), LocalDate.of(2021, 8, 28));
             list.addPlant(plantExample2);
 
-            Collections.sort(list.getPlantList());
-
+            list.sortByWatering();
 
             list.saveToFile("outputFile.txt");
 
-            System.out.println("=== Ted načítáme z námi uloženého souboru===");
+            System.out.println("=== Ted načítáme z námi uloženého souboru, seřazeno podle posledního zalévání===");
 
             list.addAllFromFile("outputFile.txt");
         }

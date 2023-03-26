@@ -7,7 +7,9 @@ import java.util.*;
 public class PlantList {
     private List<Plant> plantList = new ArrayList<>();
 
-    // region add, remove, getPlantFromIndex
+    private Set<Plant> plantSet = new HashSet<>();
+
+    // region add, remove, getPlantFromIndex, sort, getPlantlist
     public void addPlant(Plant plant){
         plantList.add(plant);
     }
@@ -21,6 +23,18 @@ public class PlantList {
             throw new IndexOutOfBoundsException();  //("Musíš zadat index od \"0\" do "+plantList.size()+". Zadal jsi "+index);
         }
         return plantList.get(index);
+    }
+
+    public void sortByName(){
+        Collections.sort(plantList, new PlantNameCommparator());
+    }
+
+    public void sortByWatering(){
+        Collections.sort(plantList, new PlantWateringComparator());
+    }
+
+    public List<Plant> getPlantList() {
+        return new ArrayList<>(plantList);
     }
 
     //endregion
@@ -46,9 +60,9 @@ public class PlantList {
         catch (NumberFormatException e){
             throw new PlantException("Špatně zadané číslo na řádku: "+lineNumber+": \""+items[2]+"\" není číslo.");
         }
-//        catch (DateFormatSymbols e) {
-//          throw new PlantException("Špatný formát datumu na řádku: " + lineNumber + "\n" + items[3] +", "+items[4]+ ": " + e.getCalendar());
-//        }
+        catch (NullPointerException e) {
+          throw new PlantException("Špatný formát datumu na řádku: " + lineNumber + "\n" + items[3] +", "+items[4]+ ": " + e.getLocalizedMessage());
+        }
     }
 
     public void saveToFile(String filename) throws PlantException {
@@ -57,9 +71,7 @@ public class PlantList {
                 outputWriter.println(plant);
             }
         } catch (IOException e) {
-            throw new PlantException("Došlo k chybě při zápisu do souboru "+filename+" "+e.getLocalizedMessage());
+            throw new PlantException("Došlo k chybě při zápisu do souboru "+filename+": "+e.getLocalizedMessage());
         }
     }
-
-    public List<Plant> getPlantList() {return new ArrayList<>(plantList);}
 }
