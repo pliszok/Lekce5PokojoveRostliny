@@ -2,6 +2,7 @@ package com.engeto.homework.lekcePokojoveRostliny;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class PlantList {
@@ -18,7 +19,7 @@ public class PlantList {
 
     public Plant getPlantFromIndex(List<Plant> plantList, int index)throws IndexOutOfBoundsException{
         if(index<0&&index> plantList.size()){
-            throw new IndexOutOfBoundsException();  //("Musíš zadat index od \"0\" do "+plantList.size()+". Zadal jsi "+index);
+            throw new IndexOutOfBoundsException("Musíš zadat index od \"0\" do "+plantList.size()+". Zadal jsi "+index);
         }
         return plantList.get(index);
     }
@@ -27,6 +28,8 @@ public class PlantList {
         Collections.sort(plantList, new PlantNameCommparator());
     }
 
+
+
     public void sortByWatering(){
         Collections.sort(plantList, new PlantWateringComparator());
     }
@@ -34,14 +37,17 @@ public class PlantList {
     public List<Plant> getPlantList() {
         return new ArrayList<>(plantList);
     }
-    //endregion
 
-    public void getPlantDate(){
+    public void getPlantDates(){
+        Set<LocalDate> dates = new HashSet<>();
         for (Plant plant:plantList){
-            System.out.println(plant.getPlanted());
+            dates.add(plant.getPlanted());
+        }
+        for (LocalDate date : dates) {
+            System.out.println(date);
         }
     }
-
+//endregion
 
     public void addAllFromFile(String filename) throws PlantException {
         int lineNumber = 0;
@@ -64,8 +70,8 @@ public class PlantList {
         catch (NumberFormatException e){
             throw new PlantException("Špatně zadané číslo na řádku: "+lineNumber+": \""+items[2]+"\" není číslo.");
         }
-        catch (NullPointerException e) {
-          throw new PlantException("Špatný formát datumu na řádku: " + lineNumber + "\n" + items[3] +", "+items[4]+ ": " + e.getLocalizedMessage());
+        catch (DateTimeParseException e) {
+          throw new PlantException("Špatný formát datumu na řádku: " + lineNumber + "\n" + e.getLocalizedMessage());
         }
     }
 

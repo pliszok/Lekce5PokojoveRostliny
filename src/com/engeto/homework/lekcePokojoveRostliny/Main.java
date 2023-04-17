@@ -38,13 +38,21 @@ public class Main {
             }
 
             list.removePlant(list.getPlantFromIndex(list.getPlantList(), 1));
+
             System.out.println("===Ted jsem ubral jeden objekt a seřadíme podle jména===");
 
-            list.sortByName();
+            List<Plant> listToSort = list.getPlantList();
+            Collections.sort(listToSort);
 
-            for (Plant plant : list.getPlantList()) {
+            for(Plant plant:listToSort){
                 System.out.println(plant);
             }
+
+//            list.sortByName();
+//
+//            for (Plant plant : list.getPlantList()) {
+//                System.out.println(plant);
+//            }
 
 
             Plant plantExample2 = new Plant("Lilie", "komentar po upravach",
@@ -57,7 +65,7 @@ public class Main {
 
             System.out.println("===Výpis datumů, kdy bylo něco zasazeno===");
 
-            list.getPlantDate();
+            list.getPlantDates();
 
             System.out.println("=== Ted načítáme z námi uloženého souboru, seřazeno podle posledního zalévání===");
 
